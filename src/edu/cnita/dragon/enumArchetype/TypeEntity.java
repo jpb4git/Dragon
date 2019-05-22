@@ -1,4 +1,4 @@
-package edu.cnita.dragon.EnumArchetype;
+package edu.cnita.dragon.enumArchetype;
 
 public enum TypeEntity {
     GUERRIER (5,10,5,10,"Bouclier"),

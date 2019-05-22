@@ -1,11 +1,11 @@
-package edu.cnita.dragon;
+package edu.cnita.dragon.items;
 
-public class Obj {
+public class Item {
 
     private String Nom;
     private int Strength;
 
-    Obj(String name, int Strength){
+    public Item(String name, int Strength){
         this.Nom = name;
         this.Strength = Strength;
     }

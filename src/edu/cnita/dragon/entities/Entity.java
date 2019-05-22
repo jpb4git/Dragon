@@ -1,7 +1,7 @@
 package edu.cnita.dragon.entities;
 
-import edu.cnita.dragon.Obj;
-import edu.cnita.dragon.EnumArchetype.TypeEntity;
+import edu.cnita.dragon.items.Item;
+import edu.cnita.dragon.enumArchetype.TypeEntity;
 
 import java.util.List;
 
@@ -25,9 +25,9 @@ public abstract class Entity {
     public int getStrength() {
         return Strength;
     }
-    public abstract Obj getOffense();
+    public abstract Item getOffense();
     public abstract String  getDefense();
-    public abstract List<Obj> getListOffense();
+    public abstract List<Item> getListOffense();
 
     //setters
     public void setNom(String nom) {

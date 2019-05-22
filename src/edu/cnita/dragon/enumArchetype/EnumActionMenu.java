@@ -1,4 +1,4 @@
-package edu.cnita.dragon.EnumArchetype;
+package edu.cnita.dragon.enumArchetype;
 
 public enum  EnumActionMenu {
     LISTE_ENTITIES(2),

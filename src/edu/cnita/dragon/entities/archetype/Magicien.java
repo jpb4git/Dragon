@@ -1,9 +1,9 @@
 package edu.cnita.dragon.entities.archetype;
 
 
-import edu.cnita.dragon.Obj;
-import edu.cnita.dragon.Sort;
-import edu.cnita.dragon.EnumArchetype.TypeEntity;
+import edu.cnita.dragon.items.Item;
+import edu.cnita.dragon.items.spells.Sort;
+import edu.cnita.dragon.enumArchetype.TypeEntity;
 import edu.cnita.dragon.entities.Entity;
 
 import java.util.ArrayList;
@@ -11,20 +11,20 @@ import java.util.List;
 
 public class Magicien extends Entity {
 
-    private List<Obj> ListOffense;
-    private Obj sort;
+    private List<Item> ListOffense;
+    private Item sort;
     private String Philtre;
 
 
     //getters
-    public Obj getSort() {
+    public Item getSort() {
         return sort;
     }
     private String getPhiltre() {
         return Philtre;
     }
     @Override
-    public Obj getOffense() {
+    public Item getOffense() {
         return this.getSort();
     }
     @Override
@@ -32,7 +32,7 @@ public class Magicien extends Entity {
         return this.getPhiltre();
     }
     @Override
-    public List<Obj> getListOffense() {
+    public List<Item> getListOffense() {
         return this.ListOffense;
     }
     //setters
@@ -55,8 +55,8 @@ public class Magicien extends Entity {
     }
 
     // Methods
-    private List<Obj>  createListSort(){
-        List<Obj> sort = new ArrayList<>();
+    private List<Item>  createListSort(){
+        List<Item> sort = new ArrayList<>();
         sort.add(new Sort("frail FireBall",3));
         sort.add(new Sort("weak FireBall",3));
         sort.add(new Sort("feeble FireBall" ,3));

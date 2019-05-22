@@ -1,4 +1,7 @@
 package edu.cnita.dragon.game;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import edu.cnita.dragon.dragonException.EntityTypeException;
+import edu.cnita.dragon.dragonException.NameLengthException;
 import edu.cnita.dragon.entities.Entity;
 import edu.cnita.dragon.ui.Console;
 import edu.cnita.dragon.ui.UI;
@@ -6,7 +9,7 @@ import edu.cnita.dragon.ui.UI;
 import java.util.ArrayList;
 import java.util.List;
 
-import static edu.cnita.dragon.EnumArchetype.EnumActionMenu.*;
+import static edu.cnita.dragon.enumArchetype.EnumActionMenu.*;
 
 public class Game {
 
@@ -27,7 +30,10 @@ public class Game {
     }
 
     /**
-     * Menu General
+     * Handle the General menu
+     * <p>
+     *  This method always returns immediately,the user response Scanner
+     * </p>
      */
     public void playGame(){
         int response = 0;
@@ -36,7 +42,13 @@ public class Game {
 
         while (response !=  EXIT_GLOBAL.getValue()) {
             if (CREATE_ENTITY.getValue() == response){
-                AddEntity();
+
+                try {
+                    AddEntity();
+                }catch (Exception e){
+
+                }
+
             }else if (EDIT_ENTITY.getValue() == response){
                 SubMenuPrepareEntries();
             }else if (LISTE_ENTITIES.getValue() == response){
@@ -44,7 +56,8 @@ public class Game {
             }else if (DELETE_ENTITY.getValue() == response){
                 SubMenuPrepareEntriesDelete();
             }else{
-                this.getConsole().showMenuHeader();
+                // general menu
+               // this.getConsole().showMenuHeader();
             }
             response = this.getConsole().showMenu();
         }
@@ -113,9 +126,22 @@ public class Game {
      * add new entity in AllayList Entities
      */
     public void AddEntity(){
-        Entity newEntity = this.getConsole().createEntity();
-        this.getEntities().add(newEntity);
+        Boolean error = true;
+        String name = "";
+        while (error){
+            try {
+               name =  this.getConsole().setNameEntity();
+                error = false;
+                Entity newEntity = this.getConsole().createEntity(name);
+                this.getEntities().add(newEntity);
+
+            } catch (NameLengthException e) {
+                System.out.println(e.getMsg());
+            }
+        }
+
     }
+
     /**
      * ShowListEntity envoie les informations des entités à la console
      */

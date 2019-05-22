@@ -1,18 +1,18 @@
 package edu.cnita.dragon.ui;
 
-import edu.cnita.dragon.EnumArchetype.EnumActionMenu;
-import edu.cnita.dragon.EnumArchetype.TypeEntity;
+import edu.cnita.dragon.dragonException.EntityTypeException;
+import edu.cnita.dragon.dragonException.NameLengthException;
+import edu.cnita.dragon.enumArchetype.EnumActionMenu;
+import edu.cnita.dragon.enumArchetype.EnumError;
+import edu.cnita.dragon.enumArchetype.TypeEntity;
 import edu.cnita.dragon.entities.Entity;
 import edu.cnita.dragon.entities.archetype.Guerrier;
 import edu.cnita.dragon.entities.archetype.Magicien;
-import edu.cnita.dragon.game.Game;
 
-import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Scanner;
+
 public class Console implements UI{
-
-
     //Attributs
     private List<Entity> entities;
     private Scanner  sc;
@@ -26,7 +26,6 @@ public class Console implements UI{
         this.entities =  entities;
         this.sc = new Scanner(System.in);
     }
-
     /**
      * Affichage menu Principal
      */
@@ -66,8 +65,13 @@ public class Console implements UI{
     public int showMenu(){
         showMenuHeader();
         String str = this.getSc().nextLine();
-        //this.getSc().close();// memory ....
-        return  Integer.parseInt(str);
+        try{
+
+            return  Integer.parseInt(str);
+        }catch(Exception e){
+           System.out.println(EnumError.ERROR_GENERAL_MENU_SELECTION.message);
+        }
+        return 0;
     }
     /**
      *
@@ -93,28 +97,83 @@ public class Console implements UI{
             System.out.println("|Defensif : " + defense);
 
     }
-    public Entity createEntity(){
 
-        String name;
+    /**
+     * Create Entity
+     *
+     * @return  Entity
+     */
+    public Entity createEntity(String name) {
+        Boolean error = true;
+        //String name;
+        String str ="";
+        while (error){
+            System.out.println(" L'archétype  de votre personnage :: 1 pour " + TypeEntity.GUERRIER + "  |  2 pour  " + TypeEntity.MAGICIEN + " ? :");
+            str = this.getSc().nextLine();
+            try{
+                setTypeEntity(str);
+                error = false;
+                if (Integer.parseInt(str) == 1 ){
+                    System.out.println("Vous avez choisi : " + TypeEntity.GUERRIER.toString());
+                    return new Guerrier(name , TypeEntity.GUERRIER);
+                }else{
+                    System.out.println("Vous avez choisi : " + TypeEntity.MAGICIEN);
+                    return  new Magicien(name ,TypeEntity.MAGICIEN);
+                }
+            }catch (Exception e){}
+        }
+      // never pass here !
+      return null;
+    }
+
+    public String setNameEntity()throws NameLengthException {
+        String name = "";
         System.out.println("Choisissez un Nom pour votre personnage  : " );
         name = this.getSc().nextLine();
-        System.out.println(" L'archétype  de votre personnage :: 1 pour " + TypeEntity.GUERRIER + "  |  2 pour  " + TypeEntity.MAGICIEN + " ? :");
-        String str = this.getSc().nextLine();
-        if (Integer.parseInt(str) == 1 ){
-            System.out.println("Vous avez choisi : " + TypeEntity.GUERRIER.toString());
-            return new Guerrier(name , TypeEntity.GUERRIER);
-        }else{
-            System.out.println("Vous avez choisi : " + TypeEntity.MAGICIEN);
-            return  new Magicien(name ,TypeEntity.MAGICIEN);
+
+        if (name.length() > 10 ){
+            throw new NameLengthException("le Nom ne doit pas être supérieur à dix caractères.");
+        }
+
+
+        if (name.length() <=  3   ){
+            throw new NameLengthException("le Nom ne doit pas être minimum  à 3 caractères.");
+        }
+
+
+     return name;
+    }
+    private void setTypeEntity(String str) throws EntityTypeException {
+        int temp = 0;
+        try{
+            temp = Integer.parseInt(str);
+        }catch (Exception e){
+            throw new EntityTypeException();
+        }
+        if (Integer.parseInt(str) != 1 && Integer.parseInt(str) != 2){
+            throw new EntityTypeException();
         }
     }
     public int showEditMenuEntity(String[] action){
         showMenuEditHeader();
         String output=" ";
+        Boolean error = true;
         for (String s : action) {
             output += s;
         }
-        System.out.println(output);
+
+
+        while(error){
+            System.out.println(output);
+            try{
+                this.getEntities().get(Integer.parseInt(this.getSc().nextLine()));
+            }catch(Exception e){
+                System.out.println(EnumError.ERROR_ENTITY_SELECTION.message);
+                error = true;
+            }
+
+        }
+
         return  Integer.parseInt(this.getSc().nextLine());
     }
     public int showDeleteMenuEntity(String[] action){

@@ -1,9 +1,9 @@
 package edu.cnita.dragon.entities.archetype;
 
 
-import edu.cnita.dragon.Arme;
-import edu.cnita.dragon.Obj;
-import edu.cnita.dragon.EnumArchetype.TypeEntity;
+import edu.cnita.dragon.items.weapons.Arme;
+import edu.cnita.dragon.items.Item;
+import edu.cnita.dragon.enumArchetype.TypeEntity;
 import edu.cnita.dragon.entities.Entity;
 
 import java.util.ArrayList;
@@ -11,29 +11,29 @@ import java.util.List;
 
 public class Guerrier extends Entity {
 
-    private Obj activeWeapon;
-    private List<Obj> ListOffense = new ArrayList<>();
+    private Item activeWeapon;
+    private List<Item> ListOffense = new ArrayList<>();
     private String bouclier;
 
     // getters
     public String getBouclier() {
         return bouclier;
     }
-    public Obj getActiveWeapon() {
+    public Item getActiveWeapon() {
         return activeWeapon;
     }
-    public List<Obj> getListOffense() {
+    public List<Item> getListOffense() {
         return ListOffense;
     }
     @Override
-    public Obj getOffense() {
+    public Item getOffense() {
         return this.getActiveWeapon();
     }
     @Override
     public String getDefense() {
         return this.getBouclier();
     }
-    public void setListOffense(List<Obj> listOffense) {
+    public void setListOffense(List<Item> listOffense) {
         ListOffense = listOffense;
     }
 
@@ -79,8 +79,8 @@ public class Guerrier extends Entity {
     }
 
     //Methods
-    private List<Obj>  createListWeapon(){
-        List<Obj> armes = new ArrayList<>();
+    private List<Item>  createListWeapon(){
+        List<Item> armes = new ArrayList<>();
         armes.add(new Arme("cleave Hachette",3));
         armes.add(new Arme ("spliter Hachette",3));
         armes.add(new Arme ("crackle Hachette",3));
