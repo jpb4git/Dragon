@@ -4,7 +4,15 @@ import edu.cnita.dragon.items.Item;
 import edu.cnita.dragon.enumArchetype.TypeEntity;
 
 import java.util.List;
-
+/**
+ * Entity
+ *
+ * La classe Entity est la classe parent
+ * Pour les personnages.
+ *
+ * (@author)
+ * @version 1.0
+ * */
 public abstract class Entity {
 
     private String Nom;

@@ -1,5 +1,13 @@
 package edu.cnita.dragon.items;
-
+/**
+ * Item
+ *
+ * La classe Item est la classe parent
+ *
+ *
+ * (@author)
+ * @version 1.0
+ * */
 public class Item {
 
     private String Nom;

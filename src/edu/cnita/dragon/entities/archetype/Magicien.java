@@ -8,7 +8,15 @@ import edu.cnita.dragon.entities.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Magicien
+ *
+ * La classe Magicien  extend la classe Entity
+ *
+ *
+ * (@author)
+ * @version 1.0
+ * */
 public class Magicien extends Entity {
 
     private List<Item> ListOffense;

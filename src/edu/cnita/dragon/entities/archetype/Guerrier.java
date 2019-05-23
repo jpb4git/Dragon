@@ -8,7 +8,15 @@ import edu.cnita.dragon.entities.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Guerrier
+ *
+ * La classe Guerrier extends Entity
+ *
+ *
+ * (@author)
+ * @version 1.0
+ * */
 public class Guerrier extends Entity {
 
     private Item activeWeapon;
