@@ -1,15 +1,9 @@
 package edu.cnita.dragon.ui;
-
-import edu.cnita.dragon.dragonException.EntityTypeException;
-import edu.cnita.dragon.dragonException.GeneralMenuException;
 import edu.cnita.dragon.dragonException.NameLengthException;
 import edu.cnita.dragon.enumArchetype.EnumActionMenu;
 import edu.cnita.dragon.enumArchetype.EnumError;
 import edu.cnita.dragon.enumArchetype.TypeEntity;
 import edu.cnita.dragon.entities.Entity;
-import edu.cnita.dragon.entities.archetype.Guerrier;
-import edu.cnita.dragon.entities.archetype.Magicien;
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -147,6 +141,7 @@ public class Console implements UI {
                 // refaire un try Exception perso ici
                 error = false;
                 Entity e = t.createEntity();
+                e.setNom(name);
                 System.out.println("Vous avez choisi : " + t.toString());
                 return e;
 
@@ -208,6 +203,7 @@ public class Console implements UI {
     public int showEditMenuEntity(String[] action){
         showMenuEditHeader();
         String output=" ";
+        int tempInteger = 1;
         Boolean error = true;
         for (String s : action) {
             output += s;
@@ -217,15 +213,15 @@ public class Console implements UI {
         while(error){
             System.out.println(output);
             try{
-                this.getEntities().get(Integer.parseInt(this.getSc().nextLine()));
+                tempInteger = Integer.parseInt(this.getSc().nextLine());
+                this.getEntities().get(tempInteger);
+
             }catch(Exception e){
-                System.out.println(EnumError.ERROR_ENTITY_SELECTION.message);
-                error = true;
+
             }
-
+            error = false;
         }
-
-        return  Integer.parseInt(this.getSc().nextLine());
+        return  tempInteger;
     }
 
     /**
@@ -249,31 +245,31 @@ public class Console implements UI {
      * @return Entity  l'entité modifiée.
      */
     public Entity formEditionEntity(Entity entity){
-        Scanner sc = new Scanner(System.in);
+        //Scanner sc = new Scanner(System.in);
         String str;
         System.out.println(entity.getNom() + " | Health:" + entity.getHealth()+ " | Strength:" + entity.getStrength()+ " | Defense :" + entity.getDefense() + " | Offense :"+ entity.getOffense().getNom());
         System.out.println("EDITION ][ Nom Entity  : " );
-        str = sc.nextLine();
+        str = this.getSc().nextLine();
         if (!str.equals("")){
             entity.setNom(str);
         }
         System.out.println("EDITION ][ Nom "+entity.getType().defense +"  : " );
-        str = sc.nextLine();
+        str = this.getSc().nextLine();
         if (!str.equals("")) {
             entity.setDefense(str);
         }
         System.out.println("EDITION ][ Relancer les dés de vie ?  y/n  : " );
-        str = sc.nextLine();
+        str = this.getSc().nextLine();
         if (str.equals("y")){
              entity.setHealth(entity.generateRandom(entity.getType().minHealth,entity.getType().maxHealth));
         }
         System.out.println("EDITION ][ Relancer les dés de puissance ?  y/n  : " );
-        str = sc.nextLine();
+        str = this.getSc().nextLine();
         if (str.equals("y")){
              entity.setStrength(entity.generateRandom(entity.getType().minStrength,entity.getType().maxStrength));
         }
         System.out.println("EDITION ][ Relancer les dés pour l'arme ?  y/n  : " );
-        str = sc.nextLine();
+        str = this.getSc().nextLine();
         if (str.equals("y")){
             //souhait
             entity.initOffense();

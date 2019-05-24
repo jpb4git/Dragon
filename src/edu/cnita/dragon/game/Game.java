@@ -77,6 +77,8 @@ public class Game {
     public void SubMenuPrepareEntries(){
         int response;
         response = EntityToStringMenu();
+
+        //response = 0;
         // Sub menu edit Entity
         while (response != 999){
             //Mise à jour de l'entity
