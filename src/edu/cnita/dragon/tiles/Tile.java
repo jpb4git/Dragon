@@ -12,12 +12,14 @@ import edu.cnita.dragon.items.Item;
 public class Tile {
 
     private int num;
+    private Event event;
+
 
     public void setEvent(Event event) {
         this.event = event;
     }
 
-    private Event event;
+
 
     /**
      *

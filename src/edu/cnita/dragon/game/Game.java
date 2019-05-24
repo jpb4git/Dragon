@@ -48,7 +48,7 @@ public class Game {
     public Game() {
         this.console = new Console(this.getEntities());
         this.board = new Board(10);
-        //this.getBoard().ShowBoard();
+        this.getBoard().ShowBoard();
     }
 
     /**
@@ -88,7 +88,7 @@ public class Game {
             int response;
             response = this.getConsole().playerSelect();
             // lancer la boucle donjon
-        System.out.println("Entité  sélectionnée : "  + this.getEntities().get(Integer.parseInt(response)));
+        System.out.println("Entité  sélectionnée : "  + this.getEntities().get(response));
 
 
     }
