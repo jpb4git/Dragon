@@ -1,4 +1,4 @@
-package edu.cnita.dragon.ui;
+package edu.cnita.dragon.Interfaces;
 
 import edu.cnita.dragon.dragonException.EntityTypeException;
 import edu.cnita.dragon.dragonException.NameLengthException;
@@ -28,5 +28,6 @@ public interface UI {
     int showDeleteMenuEntity(String[] action);
     void showEntity(String type,String nom,int health,int strength,String offense,int strengthOffense, String defense);
     Entity formEditionEntity(Entity entity);
+    int playerSelect();
 
 }

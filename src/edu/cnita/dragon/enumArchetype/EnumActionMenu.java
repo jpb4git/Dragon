@@ -8,7 +8,8 @@ public enum  EnumActionMenu {
     CREATE_ENTITY(1),
     EDIT_ENTITY(3),
     DELETE_ENTITY(4),
-    EXIT_GLOBAL(5);
+    ADVENTURE(5),
+    EXIT_GLOBAL(6);
 
     private int value;
     EnumActionMenu(int value) { this.value = value; }

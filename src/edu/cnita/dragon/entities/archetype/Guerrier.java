@@ -95,5 +95,13 @@ public class Guerrier extends Entity {
     }
 
 
+    @Override
+    public String whoIs() {
+        return "I'm an "+ this.getNom()  +".  I'm a warrior. my life is :" + this.getHealth() + " My Strength is :" + this.getStrength();
+    }
 
+    @Override
+    public void actionEvent() {
+  System.out.println("i'll fight !!! all heros in my land.");
+    }
 }

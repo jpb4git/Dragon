@@ -2,6 +2,7 @@ package edu.cnita.dragon.entities;
 
 import edu.cnita.dragon.items.Item;
 import edu.cnita.dragon.enumArchetype.TypeEntity;
+import edu.cnita.dragon.Interfaces.Event;
 
 import java.util.List;
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  * (@author)
  * @version 1.0
  * */
-public abstract class Entity {
+public abstract class Entity implements Event {
 
     private String Nom;
     private int Health;
@@ -55,13 +56,11 @@ public abstract class Entity {
     public abstract void setDefense(String defense);
     public abstract void initOffense();
 
+
     /**
      * Constructor
      */
     public Entity(){
-
-        //Health = generateRandom(this.getType().minHealth,this.getType().maxHealth);
-        //Strength = generateRandom(this.getType().minStrength,this.getType().maxStrength);
     }
     public Entity(TypeEntity t){
         this.setType(t);

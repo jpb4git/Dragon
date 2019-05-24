@@ -17,4 +17,15 @@ public class Arme extends Item {
         super(name,strength);
     }
 
+
+    @Override
+    public String whoIs() {
+        return "Im a Warrior.";
+    }
+
+
+    @Override
+    public void actionEvent() {
+
+    }
 }

@@ -1,8 +1,9 @@
 package edu.cnita.dragon.game;
 import edu.cnita.dragon.dragonException.NameLengthException;
 import edu.cnita.dragon.entities.Entity;
+import edu.cnita.dragon.tiles.Board;
 import edu.cnita.dragon.ui.Console;
-import edu.cnita.dragon.ui.UI;
+import edu.cnita.dragon.Interfaces.UI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,21 +24,31 @@ public class Game {
 
     UI console;
     List<Entity> entities = new ArrayList<>();
+    private Board board;
+    private Entity activePlayer;
 
     // Getters
     public List<Entity> getEntities() {
         return entities;
     }
-
+    public Board getBoard() { return board; }
     public UI getConsole() {
         return console;
     }
-
+    public Entity getActivePlayer() {
+        return activePlayer;
+    }
+    //SETTER
+    public void setActivePlayer(Entity activePlayer) {
+        this.activePlayer = activePlayer;
+    }
     /**
      * Constructor
      */
     public Game() {
         this.console = new Console(this.getEntities());
+        this.board = new Board(10);
+        //this.getBoard().ShowBoard();
     }
 
     /**
@@ -48,9 +59,7 @@ public class Game {
      */
     public void playGame(){
         int response = 0;
-
         response = this.getConsole().showMenu();
-
         while (response !=  EXIT_GLOBAL.getValue()) {
 
             if (CREATE_ENTITY.getValue() == response){
@@ -63,10 +72,25 @@ public class Game {
                 showListEntity();
             }else if (DELETE_ENTITY.getValue() == response){
                 SubMenuPrepareEntriesDelete();
+            }else if(ADVENTURE.getValue() == response){
+                showGame();
             }else{
             }
             response = this.getConsole().showMenu();
         }
+    }
+
+    /**
+     * Lance la partie dans le donjon.
+     *
+     */
+    private void showGame(){
+            int response;
+            response = this.getConsole().playerSelect();
+            // lancer la boucle donjon
+        System.out.println("Entité  sélectionnée : "  + this.getEntities().get(Integer.parseInt(response)));
+
+
     }
 
     //EDITING ENTITY -----------------------------------------------------
@@ -77,13 +101,10 @@ public class Game {
     public void SubMenuPrepareEntries(){
         int response;
         response = EntityToStringMenu();
-
-        //response = 0;
         // Sub menu edit Entity
         while (response != 999){
             //Mise à jour de l'entity
             this.getEntities().set(response, this.getConsole().formEditionEntity(this.getEntities().get(response)));
-            //
             response = EntityToStringMenu();
         }
     }

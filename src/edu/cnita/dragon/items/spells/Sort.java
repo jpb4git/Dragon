@@ -15,4 +15,15 @@ public class Sort extends Item {
     public Sort(String name, int strength){
         super(name,strength);
     }
+
+
+    @Override
+    public String whoIs() {
+        return "I'm a Spell.";
+    }
+
+    @Override
+    public void actionEvent() {
+
+    }
 }

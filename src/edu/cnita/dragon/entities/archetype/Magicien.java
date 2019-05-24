@@ -77,5 +77,15 @@ public class Magicien extends Entity {
         return sort;
     }
 
+    @Override
+    public String whoIs() {
+        return "I'm a Wizard.";
+    }
+
+
+    @Override
+    public void actionEvent() {
+
+    }
 }
 

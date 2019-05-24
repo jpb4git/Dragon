@@ -1,4 +1,7 @@
 package edu.cnita.dragon.items;
+
+import edu.cnita.dragon.Interfaces.Event;
+
 /**
  * Item
  *
@@ -8,7 +11,7 @@ package edu.cnita.dragon.items;
  * (@author)
  * @version 1.0
  * */
-public class Item {
+public  abstract class Item implements Event {
 
     private String Nom;
     private int Strength;
@@ -27,4 +30,6 @@ public class Item {
     public void setStrength(int strength) {
         Strength = strength;
     }
+
+
 }

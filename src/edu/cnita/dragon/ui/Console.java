@@ -1,4 +1,6 @@
 package edu.cnita.dragon.ui;
+import com.sun.org.apache.xerces.internal.impl.dv.dtd.ENTITYDatatypeValidator;
+import edu.cnita.dragon.Interfaces.UI;
 import edu.cnita.dragon.dragonException.NameLengthException;
 import edu.cnita.dragon.enumArchetype.EnumActionMenu;
 import edu.cnita.dragon.enumArchetype.EnumError;
@@ -27,8 +29,7 @@ public class Console implements UI {
     public List<Entity> getEntities() {
         return entities;
     }
-
-    public Scanner getSc() {
+    private Scanner getSc() {
         return sc;
     }
 
@@ -42,13 +43,14 @@ public class Console implements UI {
      */
     public void showMenuHeader(){
 
-        System.out.println("_______________________________________________________________________________________________________________");
+        System.out.println("______________________________________________________________________________________________________________________________________________");
         System.out.println("Ajouter une Entité :: " + EnumActionMenu.CREATE_ENTITY.getValue() +
                 " | Liste Entités :: " + EnumActionMenu.LISTE_ENTITIES.getValue() +
                 " | éditer une Entité :: " + EnumActionMenu.EDIT_ENTITY.getValue() +
                 " | Supprimer une entité :: " + EnumActionMenu.DELETE_ENTITY.getValue() +
+                " | Commencer une Partie  :: " + EnumActionMenu.ADVENTURE.getValue() +
                 " | Quitter :: " + EnumActionMenu.EXIT_GLOBAL.getValue() + " |");
-        System.out.println("_______________________________________________________________________________________________________________");
+        System.out.println("_______________________________________________________________________________________________________________________________________________");
 
     }
     /**
@@ -288,6 +290,33 @@ public class Console implements UI {
     private static void clearScreen() {
 
         System.out.print("\033[H\033[2J");
+    }
+
+
+    // GAME CONSOLE
+
+    public int playerSelect(){
+
+        int tempInteger = 1;
+        Boolean error = true;
+        System.out.println("Selectionnez un jouer pour lancer la partie : ");
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < this.getEntities().size() ; i++) {
+            output.append("Entité :").append(this.getEntities().get(i).getNom()).append(" : ").append(i);
+        }
+
+        while(error){
+            System.out.println(output);
+            try{
+                tempInteger = Integer.parseInt(this.getSc().nextLine());
+                this.getEntities().get(tempInteger);
+            }catch(Exception e){
+
+            }
+            error = false;
+        }
+        return  tempInteger;
+
     }
 
 }
