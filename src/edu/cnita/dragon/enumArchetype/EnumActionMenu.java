@@ -1,5 +1,8 @@
 package edu.cnita.dragon.enumArchetype;
 
+/**
+ * Enumeration des actions Menu
+ */
 public enum  EnumActionMenu {
     LISTE_ENTITIES(2),
     CREATE_ENTITY(1),

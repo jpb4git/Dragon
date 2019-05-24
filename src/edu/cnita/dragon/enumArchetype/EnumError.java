@@ -1,5 +1,8 @@
 package edu.cnita.dragon.enumArchetype;
 
+/**
+ * liste des messages error disponibles
+ */
 public enum EnumError {
     ERROR_TYPE_SELECTION ( "Vous devez choisir un chiffre valide.",0),
     ERROR_GENERAL_MENU_SELECTION ( "Vous devez choisir un chiffre valide.",0),

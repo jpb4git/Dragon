@@ -18,6 +18,11 @@ public abstract class Entity {
     private String Nom;
     private int Health;
     private int Strength;
+
+    public void setType(TypeEntity type) {
+        this.type = type;
+    }
+
     private TypeEntity type;
 
     //Getters
@@ -55,6 +60,13 @@ public abstract class Entity {
      */
     public Entity(){
 
+        //Health = generateRandom(this.getType().minHealth,this.getType().maxHealth);
+        //Strength = generateRandom(this.getType().minStrength,this.getType().maxStrength);
+    }
+    public Entity(TypeEntity t){
+        this.setType(t);
+        Health = generateRandom(this.getType().minHealth,this.getType().maxHealth);
+        Strength = generateRandom(this.getType().minStrength,this.getType().maxStrength);
     }
     public Entity(String nom, TypeEntity type){
         this.Nom = nom;

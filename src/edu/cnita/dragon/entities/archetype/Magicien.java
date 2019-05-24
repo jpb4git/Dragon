@@ -55,6 +55,12 @@ public class Magicien extends Entity {
     /**
      * Constructor
      */
+    public Magicien (){
+        super(TypeEntity.MAGICIEN);
+        this.ListOffense =  createListSort();
+        this.initOffense();
+        this.setDefense("Barrière Spirituelle");
+    }
     public Magicien(String name,TypeEntity type){
         super(name,type);
         this.ListOffense =  createListSort();

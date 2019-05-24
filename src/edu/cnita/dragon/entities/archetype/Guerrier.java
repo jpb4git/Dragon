@@ -60,9 +60,7 @@ public class Guerrier extends Entity {
     /**
      * Constructor
      */
-    public Guerrier(){
-        super();
-    }
+
     /**
      * overload Constructor
      *
@@ -75,16 +73,17 @@ public class Guerrier extends Entity {
      * construct and initializes a Guerrier with a name, health and strength
      *
      *
-     * @param name name String format
-     * @param type archétype for this guerrier
      */
-    public Guerrier(String name, TypeEntity type){
-        super(name,type);
+
+    public Guerrier(){
+
+        super(TypeEntity.GUERRIER);
         this.setListOffense(createListWeapon());
         this.initOffense();
         this.setDefense("Bouclier En Bois");
 
     }
+
 
     //Methods
     private List<Item>  createListWeapon(){
@@ -94,6 +93,7 @@ public class Guerrier extends Entity {
         armes.add(new Arme ("crackle Hachette",3));
         return armes;
     }
+
 
 
 }
