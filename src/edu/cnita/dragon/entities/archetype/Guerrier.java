@@ -1,6 +1,7 @@
 package edu.cnita.dragon.entities.archetype;
 
 
+import edu.cnita.dragon.Interfaces.Event;
 import edu.cnita.dragon.items.weapons.Arme;
 import edu.cnita.dragon.items.Item;
 import edu.cnita.dragon.enumArchetype.TypeEntity;
@@ -23,6 +24,15 @@ public class Guerrier extends Entity {
     private List<Item> ListOffense = new ArrayList<>();
     private String bouclier;
 
+    public String getGraphicString() {
+        return graphicString;
+    }
+
+    public void setGraphicString(String graphicString) {
+        this.graphicString = graphicString;
+    }
+
+    private String graphicString;
     // getters
     public String getBouclier() {
         return bouclier;
@@ -81,6 +91,7 @@ public class Guerrier extends Entity {
         this.setListOffense(createListWeapon());
         this.initOffense();
         this.setDefense("Bouclier En Bois");
+        this.setGraphicString("G");
 
     }
 
@@ -97,11 +108,19 @@ public class Guerrier extends Entity {
 
     @Override
     public String whoIs() {
-        return "I'm an "+ this.getNom()  +".  I'm a warrior. my life is :" + this.getHealth() + " My Strength is :" + this.getStrength();
+        return "an "+ this.getNom()  +"over their ..."  ;
     }
 
     @Override
-    public void actionEvent() {
-  System.out.println("i'll fight !!! all heros in my land.");
+    public String actionEvent(Event event){
+
+        return "i'll fight !!! all heros in my land.";
     }
+
+    @Override
+    public String displayGraphicalString() {
+        return this.getGraphicString();
+    }
+
+
 }

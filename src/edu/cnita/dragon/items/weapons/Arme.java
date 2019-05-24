@@ -1,5 +1,6 @@
 package edu.cnita.dragon.items.weapons;
 
+import edu.cnita.dragon.Interfaces.Event;
 import edu.cnita.dragon.items.Item;
 /**
  * Arme
@@ -25,7 +26,11 @@ public class Arme extends Item {
 
 
     @Override
-    public void actionEvent() {
-
+    public String actionEvent(Event event) {
+    return " ";
+    }
+    @Override
+    public String displayGraphicalString() {
+        return null;
     }
 }

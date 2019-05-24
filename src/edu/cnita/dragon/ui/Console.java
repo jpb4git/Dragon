@@ -1,11 +1,13 @@
 package edu.cnita.dragon.ui;
-import com.sun.org.apache.xerces.internal.impl.dv.dtd.ENTITYDatatypeValidator;
+
 import edu.cnita.dragon.Interfaces.UI;
 import edu.cnita.dragon.dragonException.NameLengthException;
 import edu.cnita.dragon.enumArchetype.EnumActionMenu;
 import edu.cnita.dragon.enumArchetype.EnumError;
 import edu.cnita.dragon.enumArchetype.TypeEntity;
 import edu.cnita.dragon.entities.Entity;
+
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
 
@@ -319,4 +321,10 @@ public class Console implements UI {
 
     }
 
+    public void showPlayerPosition(int index){
+        System.out.println("Vous êtes dans la piece "  + (index+1) );
+    }
+    public void showStatusRoom(String status){
+        System.out.println(status);
+    }
 }

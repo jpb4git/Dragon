@@ -1,6 +1,7 @@
 package edu.cnita.dragon.entities.archetype;
 
 
+import edu.cnita.dragon.Interfaces.Event;
 import edu.cnita.dragon.items.Item;
 import edu.cnita.dragon.items.spells.Sort;
 import edu.cnita.dragon.enumArchetype.TypeEntity;
@@ -84,8 +85,14 @@ public class Magicien extends Entity {
 
 
     @Override
-    public void actionEvent() {
+    public String actionEvent(Event event) {
+        return " ";
+    }
 
+
+    @Override
+    public String displayGraphicalString() {
+        return null;
     }
 }
 

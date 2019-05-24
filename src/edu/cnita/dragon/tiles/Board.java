@@ -61,21 +61,40 @@ public class Board {
                 }
 
                 @Override
-                public void actionEvent() {
-                    System.out.println("Rien ne se passe ici.");
+                public String actionEvent() {
+                    return "Rien ne se passe ici.";
+                }
+
+                @Override
+                public String displayGraphicalString() {
+                    return "_";
                 }
             };
         }
        return event;
     }
 
-    public void ShowBoard() {
-
+    public void ShowBoard(int index ) {
+        String LineGraphic = "";
         for (int i = 0; i < this.getTiles().size(); i++) {
-            System.out.println("Tile no : " + i);
+           /* System.out.println("Tile no : " + i);
             System.out.println(this.getTiles().get(i).getEvent().whoIs());
             this.getTiles().get(i).getEvent().actionEvent();
 
+            */
+
+
+        if (i == index ){
+            LineGraphic +=  "@";
+            LineGraphic +=  " ";
+        }else {
+            LineGraphic +=  this.getTiles().get(i).getEvent().displayGraphicalString();
+            LineGraphic +=  " ";
         }
+
+        }
+
+        System.out.println(LineGraphic);
+
     }
 }

@@ -48,7 +48,7 @@ public class Game {
     public Game() {
         this.console = new Console(this.getEntities());
         this.board = new Board(10);
-        this.getBoard().ShowBoard();
+        this.getBoard().ShowBoard(0);
     }
 
     /**
@@ -88,10 +88,26 @@ public class Game {
             int response;
             response = this.getConsole().playerSelect();
             // lancer la boucle donjon
-        System.out.println("Entité  sélectionnée : "  + this.getEntities().get(response));
+
+            this.setActivePlayer(this.getEntities().get(response));
+            System.out.println("Entité  sélectionnée : "  + this.getActivePlayer().getNom());
+
+            // on parcours le dungeon piece par piece
+            for (int i = 0; i < this.getBoard().getTiles().size();i++){
+
+                // show Stats Selected  player
+                this.getConsole().showEntity(this.getActivePlayer().getType().toString(),
+                        this.getActivePlayer().getNom(),this.getActivePlayer().getHealth(),this.getActivePlayer().getStrength(),this.getActivePlayer().getOffense().getNom(),this.getActivePlayer().getStrength(),this.getActivePlayer().getDefense());
+                // show player position
+                this.getConsole().showPlayerPosition(i);
+                //status piece
+                this.getConsole().showStatusRoom( this.getBoard().getTiles().get(i).getEvent().actionEvent()) ;
+                // show dungeon line
+                this.getBoard().ShowBoard(i);
+            }
 
 
-    }
+     }
 
     //EDITING ENTITY -----------------------------------------------------
     /**

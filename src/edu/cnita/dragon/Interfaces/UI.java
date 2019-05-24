@@ -29,5 +29,6 @@ public interface UI {
     void showEntity(String type,String nom,int health,int strength,String offense,int strengthOffense, String defense);
     Entity formEditionEntity(Entity entity);
     int playerSelect();
-
+    void showPlayerPosition(int index);
+    void showStatusRoom(String status);
 }
