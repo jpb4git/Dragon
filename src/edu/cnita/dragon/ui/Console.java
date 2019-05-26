@@ -124,6 +124,27 @@ public class Console implements UI {
     }
 
     /**
+     *
+     * @param nom  Entity name
+     * @param health Entity health
+     * @param strength Entity strength
+     */
+    public void showEntityOneLine(String nom,int health,int strength){
+
+        System.out.println("|----------------------------|");
+        System.out.print("|Name: " + nom);
+        System.out.print(" |Health: " + health);
+        System.out.println(" |Strength: " + strength);
+        System.out.println("|----------------------------|");
+
+    }
+
+    public void showEntitysOneLine(Entity player,Entity ennemy){
+
+
+    }
+
+    /**
      * Creer une Entité sur le choix Utilisateur
      *
      * @return Entity
@@ -320,11 +341,19 @@ public class Console implements UI {
         return  tempInteger;
 
     }
-
     public void showPlayerPosition(int index){
-        System.out.println("Vous êtes dans la piece "  + (index+1) );
+        System.out.println("Vous êtes dans la piece "  + (index + 1) );
     }
+
     public void showStatusRoom(String status){
+
         System.out.println(status);
+    }
+    public String nextStepDungeon(){
+        System.out.println("avancez dans le dungeon. (press any key)");
+        return this.getSc().nextLine();
+    }
+    public void  statusCombatLoop(int attk,String message){
+
     }
 }

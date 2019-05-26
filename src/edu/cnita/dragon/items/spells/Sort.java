@@ -1,6 +1,7 @@
 package edu.cnita.dragon.items.spells;
 
 import edu.cnita.dragon.Interfaces.Event;
+import edu.cnita.dragon.entities.Entity;
 import edu.cnita.dragon.items.Item;
 /**
  * Sort
@@ -24,7 +25,7 @@ public class Sort extends Item {
     }
 
     @Override
-    public String actionEvent(Event event) {
+    public String actionEvent(Entity entity) {
         return " ";
     }
     @Override

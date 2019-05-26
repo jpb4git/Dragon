@@ -1,6 +1,6 @@
 package edu.cnita.dragon.items.food;
 
-import edu.cnita.dragon.Interfaces.Event;
+import edu.cnita.dragon.entities.Entity;
 import edu.cnita.dragon.items.Item;
 
 public class Apple extends Item {
@@ -22,23 +22,18 @@ public class Apple extends Item {
 
     @Override
     public String whoIs() {
-        return "an Apple on the floor.";
+        return this.getNom();
     }
 
     @Override
-    public String actionEvent(Event event) {
-
+    public String actionEvent(Entity entity) {
+        entity.setHealth(entity.getHealth()  + this.getStrength());
+        System.out.println("You found an Apple.   You gained " + this.getStrength() + " points life");
         return null;
     }
 
 
-    @Override
-    public String actionEvent() {
 
-        return "i'll regen you  !!! for an amount of  ." + this.getStrength();
-
-
-    }
 
     @Override
     public String displayGraphicalString() {

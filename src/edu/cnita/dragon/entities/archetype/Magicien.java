@@ -85,7 +85,7 @@ public class Magicien extends Entity {
 
 
     @Override
-    public String actionEvent(Event event) {
+    public String actionEvent(Entity entity) {
         return " ";
     }
 

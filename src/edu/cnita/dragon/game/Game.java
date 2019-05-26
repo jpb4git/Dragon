@@ -86,24 +86,36 @@ public class Game {
      */
     private void showGame(){
             int response;
+            String step; // newt feature show states entity ennemy by turn
             response = this.getConsole().playerSelect();
-            // lancer la boucle donjon
 
+            // set the active player
             this.setActivePlayer(this.getEntities().get(response));
             System.out.println("Entité  sélectionnée : "  + this.getActivePlayer().getNom());
 
+
+
+
+            this.getBoard().resetBoard();
             // on parcours le dungeon piece par piece
             for (int i = 0; i < this.getBoard().getTiles().size();i++){
 
-                // show Stats Selected  player
-                this.getConsole().showEntity(this.getActivePlayer().getType().toString(),
-                        this.getActivePlayer().getNom(),this.getActivePlayer().getHealth(),this.getActivePlayer().getStrength(),this.getActivePlayer().getOffense().getNom(),this.getActivePlayer().getStrength(),this.getActivePlayer().getDefense());
+
                 // show player position
                 this.getConsole().showPlayerPosition(i);
-                //status piece
-                this.getConsole().showStatusRoom( this.getBoard().getTiles().get(i).getEvent().actionEvent()) ;
+                //Status and Event in room  #here combat and loot stuff
+                this.getBoard().getTiles().get(i).getEvent().actionEvent(this.getActivePlayer());
+                //this.getConsole().showStatusRoom( );
+                // show   One line Info player  # add enemy
+                this.getConsole().showEntityOneLine(this.getActivePlayer().getNom(),this.getActivePlayer().getHealth(),this.getActivePlayer().getStrength());
                 // show dungeon line
                 this.getBoard().ShowBoard(i);
+                step = this.getConsole().nextStepDungeon(); //
+
+                if (this.getActivePlayer().getHealth() <= 0 ){
+                    break;
+                }
+
             }
 
 

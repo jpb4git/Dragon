@@ -27,8 +27,13 @@ public interface UI {
     int showEditMenuEntity(String[] action);
     int showDeleteMenuEntity(String[] action);
     void showEntity(String type,String nom,int health,int strength,String offense,int strengthOffense, String defense);
+    void showEntityOneLine(String nom,int health,int strength);
+    void showEntitysOneLine(Entity player,Entity ennemy);
     Entity formEditionEntity(Entity entity);
     int playerSelect();
     void showPlayerPosition(int index);
     void showStatusRoom(String status);
+    String nextStepDungeon();
+
+    void  statusCombatLoop(int attk,String message);
 }

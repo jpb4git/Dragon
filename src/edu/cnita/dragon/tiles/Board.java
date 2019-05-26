@@ -1,6 +1,7 @@
 package edu.cnita.dragon.tiles;
 
 import edu.cnita.dragon.Interfaces.Event;
+import edu.cnita.dragon.entities.Entity;
 import edu.cnita.dragon.entities.archetype.Guerrier;
 import edu.cnita.dragon.items.food.Apple;
 
@@ -28,10 +29,12 @@ public class Board {
 
     private void initBoard(int numTiles) {
         for (int i = 0; i < numTiles; i++) {
+
             //create Tile
             Tile t = new Tile(i);
-            // create Item Or Enemy
 
+
+            // create Item Or Enemy
             // affect Enemy or Item to TIle
             t.setEvent(setEvent());
 
@@ -40,6 +43,11 @@ public class Board {
         }
     }
 
+    /**
+     * Create a random event for a Tile
+     * event can be (Entity Item or nothing )
+     * @return Event
+     */
     private Event setEvent() {
         double randomDouble = Math.random();
         randomDouble = randomDouble * 3 + 1;
@@ -54,6 +62,7 @@ public class Board {
             event =g;
 
         }else {
+            //Empty event
             event = new Event() {
                 @Override
                 public String whoIs() {
@@ -61,7 +70,7 @@ public class Board {
                 }
 
                 @Override
-                public String actionEvent() {
+                public String actionEvent(Entity entity) {
                     return "Rien ne se passe ici.";
                 }
 
@@ -73,25 +82,20 @@ public class Board {
         }
        return event;
     }
-
+    public void  resetBoard(){
+        this.getTiles().clear();
+        initBoard(10);
+    }
     public void ShowBoard(int index ) {
         String LineGraphic = "";
         for (int i = 0; i < this.getTiles().size(); i++) {
-           /* System.out.println("Tile no : " + i);
-            System.out.println(this.getTiles().get(i).getEvent().whoIs());
-            this.getTiles().get(i).getEvent().actionEvent();
-
-            */
-
-
-        if (i == index ){
-            LineGraphic +=  "@";
-            LineGraphic +=  " ";
-        }else {
-            LineGraphic +=  this.getTiles().get(i).getEvent().displayGraphicalString();
-            LineGraphic +=  " ";
-        }
-
+            if (i == index ){
+                LineGraphic +=  "@";
+                LineGraphic +=  " ";
+            }else {
+                LineGraphic +=  this.getTiles().get(i).getEvent().displayGraphicalString();
+                LineGraphic +=  " ";
+            }
         }
 
         System.out.println(LineGraphic);
