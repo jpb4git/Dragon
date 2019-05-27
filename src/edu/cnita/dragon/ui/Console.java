@@ -185,14 +185,12 @@ public class Console implements UI {
      * @throws NameLengthException <b> Exception sur la longueur < 3 ou > 10 </b>
      */
     public String setNameEntity()throws NameLengthException {
-        String name = "";
-        System.out.println("Choisissez un Nom pour votre personnage  : ");
-        name = this.getSc().nextLine();
 
+        System.out.println("Choisissez un Nom pour votre personnage  : ");
+        String  name = this.getSc().nextLine();
         if (name.length() > 10) {
             throw new NameLengthException("le Nom ne doit pas être supérieur à dix caractères.");
         }
-
 
         if (name.length() <= 3) {
             throw new NameLengthException("le Nom ne doit pas être minimum  à 3 caractères.");

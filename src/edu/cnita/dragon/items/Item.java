@@ -24,12 +24,5 @@ public  abstract class Item implements Event {
         return Nom;
     }
     public int getStrength() { return Strength; }
-    public void setNom(String nom) {
-        Nom = nom;
-    }
-    public void setStrength(int strength) {
-        Strength = strength;
-    }
-
 
 }

@@ -1,8 +1,6 @@
 package edu.cnita.dragon.tiles;
-
 import edu.cnita.dragon.Interfaces.Event;
-import edu.cnita.dragon.entities.Entity;
-import edu.cnita.dragon.items.Item;
+
 
 /**
  * Tile
@@ -15,7 +13,7 @@ public class Tile {
     private Event event;
 
 
-    public void setEvent(Event event) {
+    void setEvent(Event event) {
         this.event = event;
     }
 

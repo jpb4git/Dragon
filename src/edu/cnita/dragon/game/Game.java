@@ -22,8 +22,8 @@ import static edu.cnita.dragon.enumArchetype.EnumActionMenu.*;
  */
 public class Game {
 
-    UI console;
-    List<Entity> entities = new ArrayList<>();
+    private UI console;
+    private List<Entity> entities = new ArrayList<>();
     private Board board;
     private Entity activePlayer;
 
@@ -31,15 +31,15 @@ public class Game {
     public List<Entity> getEntities() {
         return entities;
     }
-    public Board getBoard() { return board; }
-    public UI getConsole() {
+    private Board getBoard() { return board; }
+    private UI getUi() {
         return console;
     }
-    public Entity getActivePlayer() {
+    private Entity getActivePlayer() {
         return activePlayer;
     }
     //SETTER
-    public void setActivePlayer(Entity activePlayer) {
+    private void setActivePlayer(Entity activePlayer) {
         this.activePlayer = activePlayer;
     }
     /**
@@ -58,8 +58,7 @@ public class Game {
      * </p>
      */
     public void playGame(){
-        int response = 0;
-        response = this.getConsole().showMenu();
+        int response = this.getUi().showMenu();
         while (response !=  EXIT_GLOBAL.getValue()) {
 
             if (CREATE_ENTITY.getValue() == response){
@@ -74,9 +73,8 @@ public class Game {
                 SubMenuPrepareEntriesDelete();
             }else if(ADVENTURE.getValue() == response){
                 showGame();
-            }else{
             }
-            response = this.getConsole().showMenu();
+            response = this.getUi().showMenu();
         }
     }
 
@@ -87,7 +85,7 @@ public class Game {
     private void showGame(){
             int response;
             String step; // newt feature show states entity ennemy by turn
-            response = this.getConsole().playerSelect();
+            response = this.getUi().playerSelect();
 
             // set the active player
             this.setActivePlayer(this.getEntities().get(response));
@@ -102,15 +100,15 @@ public class Game {
 
 
                 // show player position
-                this.getConsole().showPlayerPosition(i);
+                this.getUi().showPlayerPosition(i);
                 //Status and Event in room  #here combat and loot stuff
                 this.getBoard().getTiles().get(i).getEvent().actionEvent(this.getActivePlayer());
-                //this.getConsole().showStatusRoom( );
+                //this.getUi().showStatusRoom( );
                 // show   One line Info player  # add enemy
-                this.getConsole().showEntityOneLine(this.getActivePlayer().getNom(),this.getActivePlayer().getHealth(),this.getActivePlayer().getStrength());
+                this.getUi().showEntityOneLine(this.getActivePlayer().getNom(),this.getActivePlayer().getHealth(),this.getActivePlayer().getStrength());
                 // show dungeon line
                 this.getBoard().ShowBoard(i);
-                step = this.getConsole().nextStepDungeon(); //
+                step = this.getUi().nextStepDungeon(); //
 
                 if (this.getActivePlayer().getHealth() <= 0 ){
                     break;
@@ -126,13 +124,13 @@ public class Game {
      * prepare les Actions possibles  et update le choix utilisateur
      * updade Entity
      */
-    public void SubMenuPrepareEntries(){
+    private void SubMenuPrepareEntries(){
         int response;
         response = EntityToStringMenu();
         // Sub menu edit Entity
         while (response != 999){
             //Mise à jour de l'entity
-            this.getEntities().set(response, this.getConsole().formEditionEntity(this.getEntities().get(response)));
+            this.getEntities().set(response, this.getUi().formEditionEntity(this.getEntities().get(response)));
             response = EntityToStringMenu();
         }
     }
@@ -149,13 +147,13 @@ public class Game {
         }
 
         actionArr[actionArr.length - 1] = " Quittez le mode édition :: 999 ";
-        return this.getConsole().showEditMenuEntity(actionArr);
+        return this.getUi().showEditMenuEntity(actionArr);
     }
     //DELETE ENTITY -----------------------------------------------------
     /**
      * Affiche la liste des entities par index et supprime la selection
      */
-    public void SubMenuPrepareEntriesDelete(){
+    private void SubMenuPrepareEntriesDelete(){
         int response;
         response = EntityToStringMenuDelete();
         while (response != 999){
@@ -179,34 +177,32 @@ public class Game {
             actionArr[i] =  this.getEntities().get(i).getNom() + " Tapez " + i + "  |  ";
         }
         actionArr[actionArr.length - 1 ] = " Quittez le mode Suppression :: 999 ";
-        return this.getConsole().showDeleteMenuEntity(actionArr);
+        return this.getUi().showDeleteMenuEntity(actionArr);
     }
 
     /**
      * add new entity in AllayList Entities
      */
-    public void AddEntity(){
-        Boolean error = true;
-        String name = "";
-        while (error){
+    protected void AddEntity(){
+
+        while (true){
             try {
-               name =  this.getConsole().setNameEntity();
-                error = false;
-                this.getEntities().add(this.getConsole().createEntity(name));
+              String name =  this.getUi().setNameEntity();
+              this.getEntities().add(this.getUi().createEntity(name));
+              return;
             } catch (NameLengthException e) {
                 System.out.println(e.getMsg());
             }
         }
-
     }
 
     /**
      * ShowListEntity envoie les informations des entités à la console
      */
-    public void  showListEntity (){
+    private void  showListEntity(){
         for (int i = 0 ; i < this.getEntities().size() ;i++) {
 
-            this.getConsole().showEntity(this.getEntities().get(i).getType().toString(), this.getEntities().get(i).getNom(), this.getEntities().get(i).getHealth(),this.getEntities().get(i).getStrength(), this.getEntities().get(i).getOffense().getNom(), this.getEntities().get(i).getOffense().getStrength(), this.getEntities().get(i).getDefense());
+            this.getUi().showEntity(this.getEntities().get(i).getType().toString(), this.getEntities().get(i).getNom(), this.getEntities().get(i).getHealth(),this.getEntities().get(i).getStrength(), this.getEntities().get(i).getOffense().getNom(), this.getEntities().get(i).getOffense().getStrength(), this.getEntities().get(i).getDefense());
         }
     }
 

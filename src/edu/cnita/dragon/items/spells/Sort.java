@@ -1,6 +1,6 @@
 package edu.cnita.dragon.items.spells;
 
-import edu.cnita.dragon.Interfaces.Event;
+
 import edu.cnita.dragon.entities.Entity;
 import edu.cnita.dragon.items.Item;
 /**

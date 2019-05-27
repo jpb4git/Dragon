@@ -5,11 +5,11 @@ import edu.cnita.dragon.items.Item;
 
 public class Apple extends Item {
 
-    public String getGraphicalString() {
+    private String getGraphicalString() {
         return graphicalString;
     }
 
-    public void setGraphicalString(String graphicalString) {
+    private void setGraphicalString(String graphicalString) {
         this.graphicalString = graphicalString;
     }
 

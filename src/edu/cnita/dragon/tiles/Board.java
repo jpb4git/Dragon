@@ -52,7 +52,7 @@ public class Board {
         double randomDouble = Math.random();
         randomDouble = randomDouble * 3 + 1;
         int randomInt = (int) randomDouble;
-        Event  event = null;
+        Event  event;
 
         if (randomInt == 1){
             event = new Apple("apple", 5);
@@ -60,7 +60,6 @@ public class Board {
             Guerrier g = new Guerrier();
             g.setNom("Orc");
             event =g;
-
         }else {
             //Empty event
             event = new Event() {
@@ -87,14 +86,14 @@ public class Board {
         initBoard(10);
     }
     public void ShowBoard(int index ) {
-        String LineGraphic = "";
+        StringBuilder LineGraphic = new StringBuilder();
         for (int i = 0; i < this.getTiles().size(); i++) {
             if (i == index ){
-                LineGraphic +=  "@";
-                LineGraphic +=  " ";
+                LineGraphic.append("@");
+                LineGraphic.append(" ");
             }else {
-                LineGraphic +=  this.getTiles().get(i).getEvent().displayGraphicalString();
-                LineGraphic +=  " ";
+                LineGraphic.append(this.getTiles().get(i).getEvent().displayGraphicalString());
+                LineGraphic.append(" ");
             }
         }
 
