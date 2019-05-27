@@ -84,14 +84,27 @@ public class Game {
      */
     private void showGame(){
             int response;
-            String step; // newt feature show states entity ennemy by turn
+           // String step; // newt feature show states entity ennemy by turn
+
+
+            // si aucune Entity presente dans la list
+            if (this.getEntities().size() == 0){
+             System.out.println("pas de personnage dans la list ! ");
+             this.AddEntity();
+            }
+
             response = this.getUi().playerSelect();
+
+            // regen Entity Life
+            if (this.getEntities().get(response).getHealth() <= 0){
+                Entity e = this.getEntities().get(response);
+                e.setHealth(e.generateRandom(e.getType().minHealth, e.getType().maxHealth));
+            }
+
 
             // set the active player
             this.setActivePlayer(this.getEntities().get(response));
             System.out.println("Entité  sélectionnée : "  + this.getActivePlayer().getNom());
-
-
 
 
             this.getBoard().resetBoard();
@@ -108,7 +121,7 @@ public class Game {
                 this.getUi().showEntityOneLine(this.getActivePlayer().getNom(),this.getActivePlayer().getHealth(),this.getActivePlayer().getStrength());
                 // show dungeon line
                 this.getBoard().ShowBoard(i);
-                step = this.getUi().nextStepDungeon(); //
+                String step = this.getUi().nextStepDungeon(); //
 
                 if (this.getActivePlayer().getHealth() <= 0 ){
                     break;
