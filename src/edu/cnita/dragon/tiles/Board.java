@@ -1,6 +1,7 @@
 package edu.cnita.dragon.tiles;
 
 import edu.cnita.dragon.Interfaces.Event;
+import edu.cnita.dragon.entities.Enemy;
 import edu.cnita.dragon.entities.Entity;
 import edu.cnita.dragon.entities.archetype.Guerrier;
 import edu.cnita.dragon.items.food.Apple;
@@ -10,12 +11,14 @@ import java.util.List;
 
 public class Board {
 
+    private int numTiles;
 
     private List<Tile> tiles = new ArrayList<>();
 
 
     public Board(int numTile) {
-        initBoard(numTile);
+        this.numTiles = numTile;
+        initBoard();
     }
 
     public List<Tile> getTiles() {
@@ -26,18 +29,12 @@ public class Board {
         this.tiles = tiles;
     }
 
-
-    private void initBoard(int numTiles) {
-        for (int i = 0; i < numTiles; i++) {
+    private void initBoard() {
+        for (int i = 0; i < this.numTiles; i++) {
 
             //create Tile
             Tile t = new Tile(i);
-
-
-            // create Item Or Enemy
-            // affect Enemy or Item to TIle
             t.setEvent(setEvent());
-
             // add tile To tiles<Tile>
             this.getTiles().add(t);
         }
@@ -57,9 +54,9 @@ public class Board {
         if (randomInt == 1){
             event = new Apple("apple", 5);
         }else if (randomInt == 2){
-            Guerrier g = new Guerrier();
-            g.setNom("Orc");
-            event =g;
+            Enemy enemy = new Enemy(new Guerrier());
+            enemy.getEntity().setNom("Orc");
+            event = enemy;
         }else {
             //Empty event
             event = new Event() {
@@ -83,7 +80,7 @@ public class Board {
     }
     public void  resetBoard(){
         this.getTiles().clear();
-        initBoard(10);
+        initBoard();
     }
     public void ShowBoard(int index ) {
         StringBuilder LineGraphic = new StringBuilder();
@@ -92,11 +89,10 @@ public class Board {
                 LineGraphic.append("@");
                 LineGraphic.append(" ");
             }else {
-                LineGraphic.append(this.getTiles().get(i).getEvent().displayGraphicalString());
+                LineGraphic.append("_");
                 LineGraphic.append(" ");
             }
         }
-
         System.out.println(LineGraphic);
 
     }

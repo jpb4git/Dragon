@@ -28,7 +28,7 @@ public class Apple extends Item {
     @Override
     public String actionEvent(Entity entity) {
         entity.setHealth(entity.getHealth()  + this.getStrength());
-        System.out.println("You found an Apple.   You gained " + this.getStrength() + " points life");
+        System.out.println("You found "+this.getNom()+ ".   You gained " + this.getStrength() + " points life");
         return null;
     }
 

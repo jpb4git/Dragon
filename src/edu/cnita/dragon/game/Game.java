@@ -1,6 +1,7 @@
 package edu.cnita.dragon.game;
 import edu.cnita.dragon.dragonException.NameLengthException;
 import edu.cnita.dragon.entities.Entity;
+import edu.cnita.dragon.entities.Player;
 import edu.cnita.dragon.tiles.Board;
 import edu.cnita.dragon.ui.Console;
 import edu.cnita.dragon.Interfaces.UI;
@@ -25,7 +26,7 @@ public class Game {
     private UI console;
     private List<Entity> entities = new ArrayList<>();
     private Board board;
-    private Entity activePlayer;
+    private Player activePlayer;
 
     // Getters
     public List<Entity> getEntities() {
@@ -35,19 +36,19 @@ public class Game {
     private UI getUi() {
         return console;
     }
-    private Entity getActivePlayer() {
+    private Player getActivePlayer() {
         return activePlayer;
     }
     //SETTER
-    private void setActivePlayer(Entity activePlayer) {
-        this.activePlayer = activePlayer;
+    private void setActivePlayer(Player activePlayer) {
+
     }
     /**
      * Constructor
      */
     public Game() {
         this.console = new Console(this.getEntities());
-        this.board = new Board(10);
+        this.board = new Board(22);
         this.getBoard().ShowBoard(0);
     }
 
@@ -64,7 +65,8 @@ public class Game {
             if (CREATE_ENTITY.getValue() == response){
                 try {
                     AddEntity();
-                }catch (Exception e){ }
+                }catch (Exception ignored){ }
+
             }else if (EDIT_ENTITY.getValue() == response){
                 SubMenuPrepareEntries();
             }else if (LISTE_ENTITIES.getValue() == response){
@@ -79,7 +81,8 @@ public class Game {
     }
 
     /**
-     * Lance la partie dans le donjon.
+     *
+     *  Lance la partie dans le dungeon.
      *
      */
     private void showGame(){
@@ -89,7 +92,7 @@ public class Game {
 
             // si aucune Entity presente dans la list
             if (this.getEntities().size() == 0){
-             System.out.println("pas de personnage dans la list ! ");
+             System.out.println("pas de personnage dans la liste ! ");
              this.AddEntity();
             }
 
@@ -103,33 +106,32 @@ public class Game {
 
 
             // set the active player
-            this.setActivePlayer(this.getEntities().get(response));
-            System.out.println("Entité  sélectionnée : "  + this.getActivePlayer().getNom());
+            this.activePlayer = new Player(this.getEntities().get(response));
+
+            System.out.println("Entité  sélectionnée : "  + this.getActivePlayer().getEntity().getNom());
 
 
             this.getBoard().resetBoard();
-            // on parcours le dungeon piece par piece
+            // on parcours le dungeon pièce par pièce
             for (int i = 0; i < this.getBoard().getTiles().size();i++){
 
 
                 // show player position
                 this.getUi().showPlayerPosition(i);
                 //Status and Event in room  #here combat and loot stuff
-                this.getBoard().getTiles().get(i).getEvent().actionEvent(this.getActivePlayer());
+                this.getBoard().getTiles().get(i).getEvent().actionEvent(this.getActivePlayer().getEntity());
                 //this.getUi().showStatusRoom( );
                 // show   One line Info player  # add enemy
-                this.getUi().showEntityOneLine(this.getActivePlayer().getNom(),this.getActivePlayer().getHealth(),this.getActivePlayer().getStrength());
+                this.getUi().showEntityOneLine(this.getActivePlayer().getEntity().getNom(),this.getActivePlayer().getEntity().getHealth(),this.getActivePlayer().getEntity().getStrength());
                 // show dungeon line
                 this.getBoard().ShowBoard(i);
+                //step turn based room
                 String step = this.getUi().nextStepDungeon(); //
-
-                if (this.getActivePlayer().getHealth() <= 0 ){
+                if (this.getActivePlayer().getEntity().getHealth() <= 0 ){
                     break;
                 }
 
             }
-
-
      }
 
     //EDITING ENTITY -----------------------------------------------------
@@ -196,7 +198,7 @@ public class Game {
     /**
      * add new entity in AllayList Entities
      */
-    protected void AddEntity(){
+    private void AddEntity(){
 
         while (true){
             try {

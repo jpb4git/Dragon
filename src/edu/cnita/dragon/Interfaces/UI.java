@@ -2,6 +2,7 @@ package edu.cnita.dragon.Interfaces;
 
 import edu.cnita.dragon.dragonException.EntityTypeException;
 import edu.cnita.dragon.dragonException.NameLengthException;
+import edu.cnita.dragon.entities.Enemy;
 import edu.cnita.dragon.entities.Entity;
 
 /**
@@ -28,7 +29,7 @@ public interface UI {
     int showDeleteMenuEntity(String[] action);
     void showEntity(String type,String nom,int health,int strength,String offense,int strengthOffense, String defense);
     void showEntityOneLine(String nom,int health,int strength);
-    void showEntitysOneLine(Entity player,Entity ennemy);
+    void showEntitysOneLine(Entity player, Enemy ennemy);
     Entity formEditionEntity(Entity entity);
     int playerSelect();
     void showPlayerPosition(int index);

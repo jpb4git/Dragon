@@ -2,6 +2,7 @@ package edu.cnita.dragon.ui;
 
 import edu.cnita.dragon.Interfaces.UI;
 import edu.cnita.dragon.dragonException.NameLengthException;
+import edu.cnita.dragon.entities.Enemy;
 import edu.cnita.dragon.enumArchetype.EnumActionMenu;
 import edu.cnita.dragon.enumArchetype.EnumError;
 import edu.cnita.dragon.enumArchetype.TypeEntity;
@@ -139,6 +140,11 @@ public class Console implements UI {
 
     }
 
+    @Override
+    public void showEntitysOneLine(Entity player, Enemy ennemy) {
+
+    }
+
     public void showEntitysOneLine(Entity player,Entity ennemy){
 
 
@@ -150,19 +156,16 @@ public class Console implements UI {
      * @return Entity
      */
     public Entity createEntity(String name) {
-        Boolean error = true;
-        //String name;
-        String str ="";
+        boolean error = true;
         String outPut ="\" L'archétype  de votre personnage :: ";
         while (error){
             for (TypeEntity type : TypeEntity.values()) {
                 outPut += type.ordinal() + " pour " + type + " || ";
             }
             System.out.println(outPut);
-            str = this.getSc().nextLine();
+            String  str = this.getSc().nextLine();
             try {
                 TypeEntity t = getTypeEntity(str);
-
                 // refaire un try Exception perso ici
                 error = false;
                 Entity e = t.createEntity();
@@ -189,11 +192,11 @@ public class Console implements UI {
         System.out.println("Choisissez un Nom pour votre personnage  : ");
         String  name = this.getSc().nextLine();
         if (name.length() > 10) {
-            throw new NameLengthException("le Nom ne doit pas être supérieur à dix caractères.");
+            throw new NameLengthException("le Nom ne doit pas être supérieur à 10 caractères.");
         }
 
         if (name.length() <= 3) {
-            throw new NameLengthException("le Nom ne doit pas être minimum  à 3 caractères.");
+            throw new NameLengthException("le Nom  doit  être minimum  à 4 caractères.");
         }
 
 
@@ -202,13 +205,11 @@ public class Console implements UI {
 
     /**
      * Renvoie un type d'entity depuis une selection menu en int
-     * @param str
+     * @param str String
      * @return TypeEntity
      */
     private TypeEntity getTypeEntity(String str)  {
-        int temp = 0;
         TypeEntity t ;
-
         for (TypeEntity type : TypeEntity.values()) {
             if (type.ordinal() == Integer.parseInt(str)){
                 t= type;
@@ -225,11 +226,11 @@ public class Console implements UI {
      */
     public int showEditMenuEntity(String[] action){
         showMenuEditHeader();
-        String output=" ";
+        StringBuilder output= new StringBuilder(" ");
         int tempInteger = 1;
         Boolean error = true;
         for (String s : action) {
-            output += s;
+            output.append(s);
         }
 
 
@@ -249,14 +250,14 @@ public class Console implements UI {
 
     /**
      * Affiche dynamiquement une liste d'entités selectionnable par leur index
-     * @param action
+     * @param action String[]
      * @return int selection de l'utilisateur.
      */
     public int showDeleteMenuEntity(String[] action){
         showMenuDeleteHeader();
-        String output = " ";
+        StringBuilder output = new StringBuilder(" ");
         for (String s : action) {
-            output += s;
+            output.append(s);
         }
         System.out.println(output);
         return  Integer.parseInt(this.getSc().nextLine());
@@ -319,8 +320,8 @@ public class Console implements UI {
     public int playerSelect(){
 
         int tempInteger = 1;
-        Boolean error = true;
-        System.out.println("Selectionnez un jouer pour lancer la partie : ");
+        boolean error = true;
+        System.out.println("Selectionnez un Joueur pour lancer la Partie : ");
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < this.getEntities().size() ; i++) {
             output.append("Entité :").append(this.getEntities().get(i).getNom()).append(" : ").append(i);
@@ -340,7 +341,7 @@ public class Console implements UI {
 
     }
     public void showPlayerPosition(int index){
-        System.out.println("Vous êtes dans la piece "  + (index + 1) );
+        System.out.println("Vous êtes dans la pièce "  + (index + 1) );
     }
 
     public void showStatusRoom(String status){

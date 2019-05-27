@@ -2,6 +2,7 @@ package edu.cnita.dragon.ui;
 
 import edu.cnita.dragon.Interfaces.UI;
 import edu.cnita.dragon.dragonException.NameLengthException;
+import edu.cnita.dragon.entities.Enemy;
 import edu.cnita.dragon.entities.Entity;
 
 public class PlayerConsole implements UI {
@@ -60,11 +61,11 @@ public class PlayerConsole implements UI {
     }
 
     @Override
-    public void showEntitysOneLine(Entity player, Entity ennemy) {
+    public void showEntitysOneLine(Entity player, Enemy ennemy) {
         System.out.println("|---------------------------------------------------------------------------|");
-        System.out.println("|Name: " + player.getNom()  + "              |Name: " + ennemy.getNom());
-        System.out.println("|health: " + player.getHealth()  + "              |health: " + ennemy.getHealth());
-        System.out.println("|Strength: " + player.getStrength()  + "              |Strength: " + ennemy.getStrength());
+        System.out.println("|Name: " + player.getNom()  + "              |Name: " + ennemy.getEntity().getNom());
+        System.out.println("|health: " + player.getHealth()  + "              |health: " + ennemy.getEntity().getHealth());
+        System.out.println("|Strength: " + player.getStrength()  + "              |Strength: " + ennemy.getEntity().getStrength());
         System.out.println("|---------------------------------------------------------------------------|");
     }
 

@@ -77,22 +77,5 @@ public class Magicien extends Entity {
         sort.add(new Sort("feeble FireBall" ,3));
         return sort;
     }
-
-    @Override
-    public String whoIs() {
-        return "I'm a Wizard.";
-    }
-
-
-    @Override
-    public String actionEvent(Entity entity) {
-        return " ";
-    }
-
-
-    @Override
-    public String displayGraphicalString() {
-        return null;
-    }
 }
 

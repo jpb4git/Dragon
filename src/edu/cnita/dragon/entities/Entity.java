@@ -14,17 +14,18 @@ import java.util.List;
  * (@author)
  * @version 1.0
  * */
-public abstract class Entity implements Event {
+public abstract class Entity  {
 
     private String Nom;
     private int Health;
     private int Strength;
+    private TypeEntity type;
 
     public void setType(TypeEntity type) {
         this.type = type;
     }
 
-    private TypeEntity type;
+
 
     //Getters
     public TypeEntity getType() {
@@ -78,4 +79,7 @@ public abstract class Entity implements Event {
     }
 
 
+    public boolean isAlive() {
+        return this.getHealth() > 0 ;
+    }
 }

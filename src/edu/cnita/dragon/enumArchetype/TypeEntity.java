@@ -44,8 +44,7 @@ public enum TypeEntity {
 
     /**
      *  création à la volée d'une instance
-     * @return
-     * @throws Exception
+     * @throws Exception description
      */
     public abstract Entity createEntity() throws Exception;
 
